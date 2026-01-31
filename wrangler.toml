@@ -14,18 +14,13 @@ script_name = "cf-ai-pos-report-generator-chatbot"
 # KV Namespace for caching
 [[kv_namespaces]]
 binding = "REPORTS_CACHE"
-id = "reports-cache-namespace-id"
-preview_id = "reports-cache-preview-id"
+id = "75a5ab24bcaa4b7b9bfa0ad43148e9b6"
 
 # Build configuration
 [build]
 command = "npm run build"
 cwd = "./"
 main = "src/index.ts"
-
-# Limits
-[limits]
-cpu_ms = 30000
 
 # Development environment
 [env.development]

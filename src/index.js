@@ -2,6 +2,9 @@
 // POS Report Generator Chatbot
 import { sendMessage } from './llm/chat';
 import { executeReportWorkflow, getCachedReport } from './workflows/reportGeneration';
+import { ChatSession } from './durable_objects/ChatSession';
+// Export Durable Objects for Cloudflare binding
+export { ChatSession };
 // Enable CORS for local development and deployment
 function setCORS(response) {
     response.headers.set('Access-Control-Allow-Origin', '*');

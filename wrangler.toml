@@ -22,10 +22,6 @@ command = "npm run build"
 cwd = "./"
 main = "src/index.ts"
 
-# Limits
-[limits]
-cpu_ms = 30000
-
 # Development environment
 [env.development]
 vars = { ENVIRONMENT = "development", ACCOUNT_ID = "local-dev", DATABASE_ID = "local-db" }

@@ -66,7 +66,7 @@ export async function executeReportWorkflow(
  * Fetch POS data from database or generate sample data
  */
 async function fetchPOSData(
-  env: any,
+  _env: any,
   filters: ReportFilters,
 ): Promise<{
   transactions: any[];
@@ -123,7 +123,7 @@ async function fetchPOSData(
 async function processReportResponse(
   context: WorkflowContext,
   response: string,
-  stats: Record<string, any>,
+  _stats: Record<string, any>,
 ): Promise<GeneratedReport> {
   // Parse response into sections
   const sections = parseReportSections(response);

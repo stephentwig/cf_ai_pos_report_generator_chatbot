@@ -63,7 +63,7 @@ export async function sendMessage(
     return {
       content,
       model: 'llama-3.3-70b',
-      finishReason: response.result?.finish_reason || 'stop',
+      finishReason: String(response.result?.finish_reason || 'stop'),
       usage: {
         inputTokens: response.result?.usage?.prompt_tokens || 0,
         outputTokens: response.result?.usage?.completion_tokens || 0,
@@ -73,11 +73,10 @@ export async function sendMessage(
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('LLM Error:', errorMessage);
 
-    throw {
+    return {
       content: `Error: Unable to generate response. ${errorMessage}`,
       model: 'llama-3.3-70b',
       finishReason: 'error',
-      error: errorMessage,
     };
   }
 }
@@ -172,7 +171,7 @@ Please provide a comprehensive analysis with specific numbers and actionable rec
  * Validate if response contains valid content
  */
 export function isValidResponse(response: LLMResponse): boolean {
-  return (
+  return !!(
     response.content &&
     response.content.length > 0 &&
     response.finishReason !== 'error'

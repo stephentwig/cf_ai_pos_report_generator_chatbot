@@ -1,18 +1,9 @@
 name = "cf-ai-pos-report-generator-chatbot"
 type = "service"
 main = "src/index.ts"
+account_id = "1ceea54f4cc86668ca7a7eced8acbb06"
 compatibility_date = "2024-01-15"
 compatibility_flags = ["nodejs_compat"]
-
-# Cloudflare Workers AI binding
-[env.production.vars]
-ACCOUNT_ID = ""
-DATABASE_ID = ""
-
-# Local development variables
-[env.development.vars]
-ACCOUNT_ID = "local-dev"
-DATABASE_ID = "local-db"
 
 # Durable Objects
 [[durable_objects.bindings]]
@@ -26,29 +17,27 @@ binding = "REPORTS_CACHE"
 id = "reports-cache-namespace-id"
 preview_id = "reports-cache-preview-id"
 
-# Workers AI binding
-[[analytics_engine_datasets]]
-binding = "ANALYTICS"
-
 # Build configuration
 [build]
 command = "npm run build"
 cwd = "./"
 main = "src/index.ts"
 
-# Build watch paths
-[env.development]
-vars = { ENVIRONMENT = "development" }
+# Limits
+[limits]
+cpu_ms = 30000
 
+# Development environment
+[env.development]
+vars = { ENVIRONMENT = "development", ACCOUNT_ID = "local-dev", DATABASE_ID = "local-db" }
+
+# Production environment
 [env.production]
+vars = { ENVIRONMENT = "production", ACCOUNT_ID = "", DATABASE_ID = "" }
 routes = [
   { pattern = "example.com/api/chat", zone_name = "example.com" },
   { pattern = "example.com/api/report", zone_name = "example.com" }
 ]
-
-# Limits
-[limits]
-cpu_seconds = 30
 
 [upload_rules]
 type = "CompiledContentType"

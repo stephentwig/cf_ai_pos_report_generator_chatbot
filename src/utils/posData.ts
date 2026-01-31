@@ -3,7 +3,7 @@
 import { POSTransaction, POSItem } from '../types/index';
 
 // Sample products database
-export const SAMPLE_PRODUCTS: Record<string, POSItem & { unitPrice: number; category: string }> = {
+export const SAMPLE_PRODUCTS: Record<string, POSItem & { unitPrice: number }> = {
   'SKU-001': {
     sku: 'SKU-001',
     name: 'Cappuccino',
@@ -11,7 +11,6 @@ export const SAMPLE_PRODUCTS: Record<string, POSItem & { unitPrice: number; cate
     quantity: 0,
     unitPrice: 4.50,
     totalPrice: 0,
-    category: 'Beverages',
   },
   'SKU-002': {
     sku: 'SKU-002',
@@ -20,7 +19,6 @@ export const SAMPLE_PRODUCTS: Record<string, POSItem & { unitPrice: number; cate
     quantity: 0,
     unitPrice: 2.75,
     totalPrice: 0,
-    category: 'Beverages',
   },
   'SKU-003': {
     sku: 'SKU-003',
@@ -29,7 +27,6 @@ export const SAMPLE_PRODUCTS: Record<string, POSItem & { unitPrice: number; cate
     quantity: 0,
     unitPrice: 3.50,
     totalPrice: 0,
-    category: 'Pastries',
   },
   'SKU-004': {
     sku: 'SKU-004',
@@ -38,7 +35,6 @@ export const SAMPLE_PRODUCTS: Record<string, POSItem & { unitPrice: number; cate
     quantity: 0,
     unitPrice: 4.00,
     totalPrice: 0,
-    category: 'Pastries',
   },
   'SKU-005': {
     sku: 'SKU-005',
@@ -47,7 +43,6 @@ export const SAMPLE_PRODUCTS: Record<string, POSItem & { unitPrice: number; cate
     quantity: 0,
     unitPrice: 9.99,
     totalPrice: 0,
-    category: 'Food',
   },
   'SKU-006': {
     sku: 'SKU-006',
@@ -56,7 +51,6 @@ export const SAMPLE_PRODUCTS: Record<string, POSItem & { unitPrice: number; cate
     quantity: 0,
     unitPrice: 10.50,
     totalPrice: 0,
-    category: 'Food',
   },
   'SKU-007': {
     sku: 'SKU-007',
@@ -65,7 +59,6 @@ export const SAMPLE_PRODUCTS: Record<string, POSItem & { unitPrice: number; cate
     quantity: 0,
     unitPrice: 3.00,
     totalPrice: 0,
-    category: 'Beverages',
   },
   'SKU-008': {
     sku: 'SKU-008',
@@ -74,7 +67,6 @@ export const SAMPLE_PRODUCTS: Record<string, POSItem & { unitPrice: number; cate
     quantity: 0,
     unitPrice: 2.50,
     totalPrice: 0,
-    category: 'Pastries',
   },
   'SKU-009': {
     sku: 'SKU-009',
@@ -83,7 +75,6 @@ export const SAMPLE_PRODUCTS: Record<string, POSItem & { unitPrice: number; cate
     quantity: 0,
     unitPrice: 8.99,
     totalPrice: 0,
-    category: 'Food',
   },
   'SKU-010': {
     sku: 'SKU-010',
@@ -92,7 +83,6 @@ export const SAMPLE_PRODUCTS: Record<string, POSItem & { unitPrice: number; cate
     quantity: 0,
     unitPrice: 5.50,
     totalPrice: 0,
-    category: 'Beverages',
   },
 };
 

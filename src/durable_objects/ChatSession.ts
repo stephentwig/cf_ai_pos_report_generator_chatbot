@@ -1,21 +1,14 @@
 // Chat Session Durable Object for managing conversation state
 
-import { ChatSession, ChatMessage } from '../types/index';
+import { ChatSession as ChatSessionType, ChatMessage } from '../types/index';
 
-interface StorageObject {
-  get(key: string): Promise<any>;
-  put(key: string, value: any): Promise<void>;
-  delete(key: string): Promise<void>;
-  list(options?: any): Promise<Map<string, any>>;
-}
-
-export class ChatSession implements DurableObject {
-  state: DurableObjectState;
+export class ChatSession {
+  state: any;
   env: any;
   sessionId: string;
-  session: ChatSession | null = null;
+  session: ChatSessionType | null = null;
 
-  constructor(state: DurableObjectState, env: any) {
+  constructor(state: any, env: any) {
     this.state = state;
     this.env = env;
     this.sessionId = state.id.toString();
@@ -24,8 +17,8 @@ export class ChatSession implements DurableObject {
   /**
    * Initialize or retrieve session
    */
-  async initSession(userId: string): Promise<ChatSession> {
-    const stored = await this.state.storage.get<ChatSession>('session');
+  async initSession(userId: string): Promise<ChatSessionType> {
+    const stored = (await this.state.storage.get('session')) as ChatSessionType | undefined;
 
     if (stored) {
       this.session = stored;
@@ -46,7 +39,7 @@ export class ChatSession implements DurableObject {
     }
 
     await this.state.storage.put('session', this.session);
-    return this.session;
+    return this.session!;
   }
 
   /**
@@ -84,7 +77,7 @@ export class ChatSession implements DurableObject {
     if (!this.session) {
       throw new Error('Session not initialized');
     }
-    return this.session.messages;
+    return (this.session?.messages as ChatMessage[]) || [];
   }
 
   /**
@@ -127,7 +120,7 @@ export class ChatSession implements DurableObject {
   /**
    * Get session info
    */
-  async getSessionInfo(): Promise<ChatSession> {
+  async getSessionInfo(): Promise<ChatSessionType> {
     if (!this.session) {
       throw new Error('Session not initialized');
     }
@@ -203,5 +196,3 @@ export class ChatSession implements DurableObject {
     }
   }
 }
-
-export default ChatSession;

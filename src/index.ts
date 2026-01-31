@@ -1,7 +1,7 @@
 // Main Cloudflare Worker entry point
 // POS Report Generator Chatbot
 
-import { sendMessage, generateReport } from './llm/chat';
+import { sendMessage } from './llm/chat';
 import { executeReportWorkflow, getCachedReport } from './workflows/reportGeneration';
 import { APIResponse, ChatResponse, ReportResponse } from './types/index';
 
@@ -99,7 +99,7 @@ export default {
   },
 
   // Scheduled handler for periodic tasks (optional)
-  async scheduled(event: ScheduledEvent, env: any, ctx: any): Promise<void> {
+  async scheduled(_event: any, _env: any, _ctx: any): Promise<void> {
     console.log('Scheduled task triggered');
     // Add any scheduled maintenance tasks here
   },

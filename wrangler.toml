@@ -1,0 +1,56 @@
+name = "cf-ai-pos-report-generator-chatbot"
+type = "service"
+main = "src/index.ts"
+compatibility_date = "2024-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+# Cloudflare Workers AI binding
+[env.production.vars]
+ACCOUNT_ID = ""
+DATABASE_ID = ""
+
+# Local development variables
+[env.development.vars]
+ACCOUNT_ID = "local-dev"
+DATABASE_ID = "local-db"
+
+# Durable Objects
+[[durable_objects.bindings]]
+name = "CHAT_SESSION"
+class_name = "ChatSession"
+script_name = "cf-ai-pos-report-generator-chatbot"
+
+# KV Namespace for caching
+[[kv_namespaces]]
+binding = "REPORTS_CACHE"
+id = "reports-cache-namespace-id"
+preview_id = "reports-cache-preview-id"
+
+# Workers AI binding
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+
+# Build configuration
+[build]
+command = "npm run build"
+cwd = "./"
+main = "src/index.ts"
+
+# Build watch paths
+[env.development]
+vars = { ENVIRONMENT = "development" }
+
+[env.production]
+routes = [
+  { pattern = "example.com/api/chat", zone_name = "example.com" },
+  { pattern = "example.com/api/report", zone_name = "example.com" }
+]
+
+# Limits
+[limits]
+cpu_seconds = 30
+
+[upload_rules]
+type = "CompiledContentType"
+globs = ["**/*.wasm"]
+fallthrough = true

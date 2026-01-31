@@ -1,0 +1,29 @@
+{
+  "name": "cf-ai-pos-report-generator-chatbot",
+  "version": "1.0.0",
+  "description": "AI-powered POS Report Generator Chatbot using Cloudflare Workers and Llama 3.3",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --local",
+    "deploy": "wrangler deploy",
+    "build": "tsc",
+    "start": "wrangler dev",
+    "test": "vitest",
+    "format": "prettier --write \"src/**/*.ts\" \"frontend/**/*.{js,html,css}\"",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "wrangler": "^3.28.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240620.0",
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "prettier": "^3.1.1",
+    "vitest": "^1.1.0"
+  }
+}

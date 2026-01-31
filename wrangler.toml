@@ -1,0 +1,45 @@
+name = "cf-ai-pos-report-generator-chatbot"
+type = "service"
+main = "src/index.ts"
+account_id = "1ceea54f4cc86668ca7a7eced8acbb06"
+compatibility_date = "2024-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+# Durable Objects
+[[durable_objects.bindings]]
+name = "CHAT_SESSION"
+class_name = "ChatSession"
+script_name = "cf-ai-pos-report-generator-chatbot"
+
+# KV Namespace for caching
+[[kv_namespaces]]
+binding = "REPORTS_CACHE"
+id = "reports-cache-namespace-id"
+preview_id = "reports-cache-preview-id"
+
+# Build configuration
+[build]
+command = "npm run build"
+cwd = "./"
+main = "src/index.ts"
+
+# Limits
+[limits]
+cpu_ms = 30000
+
+# Development environment
+[env.development]
+vars = { ENVIRONMENT = "development", ACCOUNT_ID = "local-dev", DATABASE_ID = "local-db" }
+
+# Production environment
+[env.production]
+vars = { ENVIRONMENT = "production", ACCOUNT_ID = "", DATABASE_ID = "" }
+routes = [
+  { pattern = "example.com/api/chat", zone_name = "example.com" },
+  { pattern = "example.com/api/report", zone_name = "example.com" }
+]
+
+[upload_rules]
+type = "CompiledContentType"
+globs = ["**/*.wasm"]
+fallthrough = true

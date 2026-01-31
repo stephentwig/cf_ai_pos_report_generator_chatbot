@@ -4,6 +4,10 @@
 import { sendMessage } from './llm/chat';
 import { executeReportWorkflow, getCachedReport } from './workflows/reportGeneration';
 import { APIResponse, ChatResponse, ReportResponse } from './types/index';
+import { ChatSession } from './durable_objects/ChatSession';
+
+// Export Durable Objects for Cloudflare binding
+export { ChatSession };
 
 // Enable CORS for local development and deployment
 function setCORS(response: Response): Response {
